@@ -16,6 +16,7 @@ class AccessLog extends Migration
         Schema::create('access_log', function(Blueprint $table) {
             $table->id();
             $table->string('user_agent');
+            $table->string('ip');
             $table->string('short');
             $table->boolean('valid');
             $table->timestamps();

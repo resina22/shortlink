@@ -16,6 +16,7 @@ class ShortLinkController extends Controller
         $acessLog = new AccessLog();
         $acessLog->user_agent = $request->headers->get('user-agent');
         $acessLog->short = $short_link;
+        $acessLog->ip = $request->ip();
 
         $taget = Link::where('short', $short_link);
         $acessLog->valid = $taget->exists();

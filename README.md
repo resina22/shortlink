@@ -17,14 +17,14 @@ Para realizar as configurações das variáveis de ambiente renomeie o arquivo `
 ## ShortLink
 #### Criar
 - Short dinâmico
-```json
+```
 mutation {
     createShortLink(target: "http://www.google.com/" ) {
     id, short, target, short_link }
 }
 ```
 - Especificar short
-```json
+```
 mutation {
     createShortLink(target: "http://www.google.com/", short: "teste" ) {
         id, short, target, short_link
@@ -33,7 +33,7 @@ mutation {
 ```
 #### Listar
 - Todos os registros
-```json
+```
 {
     links{
         id, target, short, protocol, short_link, created_at, updated_at
@@ -41,7 +41,7 @@ mutation {
 }
 ```
 - Buscar pelo short
-```json
+```
 {
     link(short: "teste") {
         id, target, short, protocol, short_link, created_at, updated_at
@@ -52,19 +52,19 @@ mutation {
 Ao acessar o ShortLink sera redirecionado para o link original
 
 - Lista todos os redirecionamentos 
-```json
+```
 {
     hits {
-        id, user_agent, short, valid, created_at, user_agent
+        id, ip, user_agent, short, valid, created_at, user_agent
     }
 }
 ```
 
 - Busca o redirecionamento pelo short
-```json
+```
 {
     hit(short: "teste") {
-        id, user_agent, short, valid, created_at, user_agent
+        id, ip, user_agent, short, valid, created_at, user_agent
     }
 }
 ```
