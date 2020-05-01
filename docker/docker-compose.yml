@@ -1,0 +1,56 @@
+version: '3.1'
+
+services:
+  nginx:
+    container_name: nginx
+    build: nginx
+    command: nginx -g "daemon off;"
+    links:
+      - php
+    ports:
+      - "80:80"
+    depends_on:
+      - db
+
+  php:
+    container_name: php
+    build: php
+    volumes:
+      - ./../shortlinks:/var/www/html
+    working_dir: /var/www/html/app/public
+    command: php-fpm
+    environment:
+      DB_HOST: db
+      DB_DATABASE: shortlinks
+      DB_USERNAME: user
+      DB_PASSWORD: shortlinks_123
+    ports:
+      - "9000:9000"
+    links:
+      - db
+    depends_on:
+      - db
+
+  db:
+    container_name: db
+    image: mysql:latest
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - ./../db:/var/lib/mysql
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_DATABASE: shortlinks
+      MYSQL_USER: user
+      MYSQL_PASSWORD: shortlinks_123
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: shortlinks_root
+
+  composer:
+    container_name: composer
+    image: composer:latest
+    restart: always
+    volumes:
+      - ./../shortlinks:/app
+    command: composer install

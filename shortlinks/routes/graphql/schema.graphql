@@ -1,0 +1,9 @@
+type Query {
+    hits: [AccessLog!]! @all
+    hit(short: String @eq): [AccessLog!]! @all
+    links: [Link!]! @all
+    link(short: String @eq): Link @find
+}
+
+#import access_log.graphql
+#import link.graphql

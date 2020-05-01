@@ -1,0 +1,8 @@
+type AccessLog {
+    id: Int,
+    user_agent: String,
+    short: String,
+    valid: Boolean,
+    created_at: String,
+    updated_at: String,
+}

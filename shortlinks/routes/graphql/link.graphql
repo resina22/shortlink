@@ -1,0 +1,20 @@
+type Link {
+    id: Int,
+    target: String,
+    protocol: Protocol,
+    short: String,
+    short_link: String,
+    created_at: String,
+    updated_at: String,
+}
+
+type Mutation {
+    createShortLink(target: String!, short: String): Link
+    @field(resolver: "LinkMutation@create")
+}
+
+enum Protocol {
+    HTTP @enum(value: "http")
+    HTTPS @enum(value: "https")
+    FTP @enum(value: "ftp")
+}
